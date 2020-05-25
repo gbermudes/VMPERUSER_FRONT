@@ -1,0 +1,34 @@
+body {
+    font-family: Verdana;
+}
+
+h1{
+    background-color: blueviolet;
+    color: white;
+}
+
+p{
+    font-size: 15px;
+}
+
+#divgeral{
+    background-color: burlywood;
+}
+
+#divinterna{
+    font-family: Arial;
+    color: green;
+}
+#divinternainterna{
+    font-family: Courier;
+    color: blue;
+}
+
+.classe1{
+    background-color: lightcoral;
+    border: 2px dashed black;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+}

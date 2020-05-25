@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="novopedido.css">
+        <script type="text/javascript" src="novopedido.js"> </script>
+    </head>
+    <body onload="carregaitens();">
+
+        <h3> Novo Pedido </h3>
+        <hr/>
+        <div class="row">
+            <div class="col-4">
+                <form id="formMaquina">
+                    Quantidade de Processador   <input type="number" id="numProc"><br/>
+                    Quantidade de Memória       <input type="number" id="numMemo"><br/>
+                    Quantidade de Disco         <input type="number" id="numDisc"><br/>
+                    Quantidade de Banda         <input type="number" id="numBand"><br/>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <form id="formPedido">
+                        Data do Pedido (dd/mm/aaaa) <input type="text" id="txtData"> <br/>
+                        Observacoes  <input type="text" id="txtObs">
+                        <div id="listaSw">      
+                        </div>
+                        <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
+                    </form>
+                </div>               
+            </div>
+        </div>     
+    </body>
+</html>
