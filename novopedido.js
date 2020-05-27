@@ -53,15 +53,22 @@ function obterValorSw(res, x){
 
 function obterValor(){
     
-    var numProc = document.getElementById("numProc").value;
-    var numMemo = document.getElementById("numMemo").value;
-    var numDisc = document.getElementById("numDisc").value;
-    var numBand = document.getElementById("numBand").value;
+    var numProc = parseInt(document.getElementById("numProc").value);
+    var numMemo = parseInt(document.getElementById("numMemo").value);
+    var numDisc = parseInt(document.getElementById("numDisc").value);
+    var numBand = parseInt(document.getElementById("numBand").value);
     //var valorSoftwares = document.getElementById(valorSoftwares);
     var custo = 0;
     
     //var valorSoftwares = carregavalor(valorSoftwares);
-    custo = (parseInt(numProc.value) * 10 + parseInt(numMemo.value) * 5 ) + parseInt(numDisc.value) + parseInt(numBand.value); 
+    custo = numProc * 10;
+    console.log(" 3.1 - valor Custo = " + custo);
+    custo = custo + numMemo * 5;
+    console.log(" 3.2 - valor Custo = " + custo);
+    custo = custo + numDisc;
+    console.log(" 3.3 - valor Custo = " + custo);
+    custo = custo + numBand; 
+    console.log(" 3.4 - valor Custo = " + custo);
     custo = parseInt(custo); // da 1511 se tudo 1 cpu 1 mem 1 disco.. 
     console.log(" 3 - valor Custo = " + custo);
     carregavalor(custo);
@@ -110,27 +117,9 @@ qntd_cpu	int	YES
 qntd_disco	int	YES			
 qntd_memoria	int	YES			
 valor_total	float	YES			 */
-    
 
-    var msgMaquina = {
-        qntd_cpu : numProc,
-        qntd_memoria : numMemo,
-        qntd_disco : numDisc,
-        qntd_banda : numBand,
-    }
-
-    var cabecalhoMaquina = {
-        method : 'POST',
-        body : JSON.stringify(msgMaquina),
-        headers : {
-            'Content-Type': 'application/json'
-        }
-    }
-
-    fetch("http://localhost:8080/maquina/nova",cabecalhoMaquina)
-    .then(res => alert("foi Maquina!!!"))
-    .catch(err => alert("deu ruim Maquina"));
-
+cadastraMaquina(numProc, numMemo, numDisc, numBand);
+      
     var msgSolicitacao = {
         data : txtData,
         observacoes : txtObs,
@@ -141,12 +130,14 @@ valor_total	float	YES			 */
         itensSolicitacao:[]
     }
 
+   // msgSolicitacao.itensSolicitacao[0] = { maquina : 3}
+
     var listaSw = document.getElementsByName("softwares[]");
     var cont=0;
     for (i=0; i<listaSw.length; i++){
         if (listaSw[i].checked){
             var idSoftware = parseInt(listaSw[i].value);
-            var itemSoftware = {
+            var itemSoftware = { 
                software : { id: idSoftware }
             }
             msgSolicitacao.itensSolicitacao[cont] = itemSoftware;
@@ -200,5 +191,41 @@ function calculoPrevio(){
     .catch(err => alert("deu ruim"));
 
   console.log(msgCalculoPrevio);
+
+}
+
+function recuperaMaquina (res){
+    console.log(" 6 - res recuperado = " + res);
+
+}
+
+function cadastraMaquina(processador, memoria, disco, banda){
+    
+    var id = 0;
+    var msgMaquina = {
+        qntd_cpu : processador,
+        qntd_memoria : memoria,
+        qntd_disco : disco,
+        qntd_banda : banda,
+    }
+
+    var cabecalhoMaquina = {
+        method : 'POST',
+        body : JSON.stringify(msgMaquina),
+        headers : {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch("http://localhost:8080/maquina/nova",cabecalhoMaquina)
+    //.then(res => alert("foi Maquina!!!"))
+    .then(res => res.json("id"))
+    .then(res => recuperaMaquina(res))
+    .then(res => console.log( " 7 - res dentro do fech" + res))
+    .catch(err => alert("deu ruim Maquina"));
+
+    
+
+    return id;
 
 }
