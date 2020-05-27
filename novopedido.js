@@ -1,4 +1,6 @@
 var valorSoftwares = 0;
+var idmaquina_global=0;
+
 var templateMaquina = '<p> CPU: {{CPU}}</p> '+
                       '<p> MEMORIA RAM: {{RAM}}</p>'+
                       '<p> DISCO: {{DISCO}}</p>' +
@@ -117,10 +119,12 @@ qntd_cpu	int	YES
 qntd_disco	int	YES			
 qntd_memoria	int	YES			
 valor_total	float	YES			 */
+console.log(" 8 - chama cadastrar maquina");
 
 cadastraMaquina(numProc, numMemo, numDisc, numBand);
       
     var msgSolicitacao = {
+        //id  : null,
         data : txtData,
         observacoes : txtObs,
         valor : txtValor,
@@ -130,10 +134,31 @@ cadastraMaquina(numProc, numMemo, numDisc, numBand);
         itensSolicitacao:[]
     }
 
+    /* 	"itensSolicitacao" : [  {
+								"maquina" : {"id": 7}
+							},
+								{
+								"software": { "id": 2}
+							},
+							{
+								 "software": { "id" :3 }
+							}
+							],
+*/
+console.log("ID maquina var global =" + idmaquina_global);    
+var jmaquina = { maquina : { id : idmaquina_global  }}
+    
+    console.log("objeto json maquina" + jmaquina);
+
+    msgSolicitacao.itensSolicitacao[0] = jmaquina;
+
+    console.log( "o que tem no json msg solicitação =  " +  msgSolicitacao.itensSolicitacao[0]);
+
+
    // msgSolicitacao.itensSolicitacao[0] = { maquina : 3}
 
     var listaSw = document.getElementsByName("softwares[]");
-    var cont=0;
+    var cont=1;
     for (i=0; i<listaSw.length; i++){
         if (listaSw[i].checked){
             var idSoftware = parseInt(listaSw[i].value);
@@ -160,46 +185,15 @@ cadastraMaquina(numProc, numMemo, numDisc, numBand);
     console.log(msgSolicitacao);
 }
 
-function calculoPrevio(){
-    var numProc = document.getElementById("numProc").value;
-    var numMemo = document.getElementById("numMemo").value;
-    var numDisc = document.getElementById("numDisc").value;
-    var numBand = document.getElementById("numBand").value;
-    carregavalor();
-    var valSosf = valorSoftwares;
-    var userStr = localStorage.getItem("VMuser");
-    var user = JSON.parse(userStr);
 
-    var msgCalculoPrevio = {
-        proc : numProc,
-        mem  : numMemo,
-        disc : numDisc,
-        band : numBand ,
-        soft : valSosf            
-    }
-
-    var cabecalho = {
-        method : 'POST',
-        body : JSON.stringify(msgCalculoPrevio),
-        headers : {
-            'Content-Type': 'application/json'
-        }
-    }
-    
-    fetch("http://localhost:8080/maquina/calculo",cabecalho)
-    .then(res => alert("foi!!!"))
-    .catch(err => alert("deu ruim"));
-
-  console.log(msgCalculoPrevio);
-
-}
 
 function recuperaMaquina (res){
-    console.log(" 6 - res recuperado = " + res);
+  //  console.log(" 6 - res recuperado = " + res.id);
+    console.log(" 7 - res id maquina = " + JSON.stringify(res.id));
 
+    idmaquina_global = res.id;
 }
-
-function cadastraMaquina(processador, memoria, disco, banda){
+async function cadastraMaquina(processador, memoria, disco, banda){
     
     var id = 0;
     var msgMaquina = {
@@ -217,15 +211,21 @@ function cadastraMaquina(processador, memoria, disco, banda){
         }
     }
 
-    fetch("http://localhost:8080/maquina/nova",cabecalhoMaquina)
+    try{
+    const resp = await fetch("http://localhost:8080/maquina/nova",cabecalhoMaquina)
+    const data = await resp.json();
+    idmaquina_global = parseInt(data.id);
+    //return data.id;
+
+    } catch (err) {
+        alert ("deu ruim maquina ");
+    }
     //.then(res => alert("foi Maquina!!!"))
-    .then(res => res.json("id"))
-    .then(res => recuperaMaquina(res))
-    .then(res => console.log( " 7 - res dentro do fech" + res))
-    .catch(err => alert("deu ruim Maquina"));
-
+    //.then(res => res.json())
+    //.then(res => recuperaMaquina(res))
+    //.catch(err => alert("deu ruim Maquina"));
     
-
-    return id;
+    //console.log(" 8 - resultado de  id depois  = " + id);
+ 
 
 }
