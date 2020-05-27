@@ -18,12 +18,21 @@
                 </form>
                 <button type="button" onclick="obterValor();"> Obter Valor </button>
             </div>
+        </br>
+            <div class="col-4"> 
+                <h3>
+                    Custo hora R$
+                    <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
+                </h3>
+                
+            </div>
             <div class="row">
                 <div class="col-8">
                     <form id="formPedido">
                         Data do Pedido (dd/mm/aaaa) <input type="text" id="txtData"> <br/>
                         Observacoes  <input type="text" id="txtObs">
-                        <div id="listaSw">      
+                        <div id="listaSw">
+
                         </div>
                         <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
                     </form>
