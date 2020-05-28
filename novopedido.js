@@ -39,18 +39,13 @@ function obterValorSw(res, x){
         if(listaSw[i].checked){
             //valorSoftwares = valorSoftwares + templateCh.replace("{{VALOR}}",res[i].valor);
             valorSoftwares = valorSoftwares + res[i].valor;
-            console.log (" 1.1 - valor i + software" + i + " - " +valorSoftwares);
+            
         }
         
     }
-    //document.getElementById("listaSw").innerHTML = valorSoftwares;
-    console.log(" 1 - valor Softwares depois do for = " + valorSoftwares);
+        
     document.getElementById("txtCustoHora").value = valorSoftwares;
-    //return valorSoftwares;
-    /*custo = Number.parseFloat(custo);
-    custo = (custo + valorSoftwares).toFixed(2);
-    console.log(custo);
-    */
+    
 }
 
 function obterValor(){
@@ -61,27 +56,13 @@ function obterValor(){
     var numBand = parseInt(document.getElementById("numBand").value);
     //var valorSoftwares = document.getElementById(valorSoftwares);
     var custo = 0;
-    
-    //var valorSoftwares = carregavalor(valorSoftwares);
-    custo = numProc * 10;
-    console.log(" 3.1 - valor Custo = " + custo);
-    custo = custo + numMemo * 5;
-    console.log(" 3.2 - valor Custo = " + custo);
-    custo = custo + numDisc;
-    console.log(" 3.3 - valor Custo = " + custo);
-    custo = custo + numBand; 
-    console.log(" 3.4 - valor Custo = " + custo);
-    custo = parseInt(custo); // da 1511 se tudo 1 cpu 1 mem 1 disco.. 
-    console.log(" 3 - valor Custo = " + custo);
-    carregavalor(custo);
-    valorSoftwares = parseInt(valorSoftwares);
-
-    //var valorSoftwares = valorSoftwares;
-    console.log(" 2 - valorSoftwares = "+ valorSoftwares);
-    
-    //custo = (custo + valorSoftwares);
-    console.log(" 4 -valor custo + valor software = " + custo);
    
+    //var valorSoftwares = carregavalor(valorSoftwares);
+    custo = (numProc * 10) + (numMemo * 5) + numDisc + numBand;
+    custo = parseInt(custo); // da 17 se tudo 1 cpu 1 mem 1 disco.. 
+    carregavalor(custo); // pega valor de maquima e soma software..
+   
+    valorSoftwares = parseInt(valorSoftwares);
     
 }
 
@@ -109,20 +90,11 @@ function enviarPedido(){
     var txtObs  = document.getElementById("txtObs").value;
     var txtValor = document.getElementById("txtCustoHora").value;
     txtValor = parseFloat(txtValor);
-    console.log (" 5 - txtValor antes de enviarPedio = " + txtValor);
     
+  
+
     var userStr = localStorage.getItem("VMuser");
     var user = JSON.parse(userStr);
-/*id	int	NO	PRI		auto_increment
-qntd_banda	int	YES			
-qntd_cpu	int	YES			
-qntd_disco	int	YES			
-qntd_memoria	int	YES			
-valor_total	float	YES			 */
-console.log(" 8 - chama cadastrar maquina");
-
-cadastraMaquina(numProc, numMemo, numDisc, numBand);
-      
     var msgSolicitacao = {
         //id  : null,
         data : txtData,
@@ -134,66 +106,17 @@ cadastraMaquina(numProc, numMemo, numDisc, numBand);
         itensSolicitacao:[]
     }
 
-    /* 	"itensSolicitacao" : [  {
-								"maquina" : {"id": 7}
-							},
-								{
-								"software": { "id": 2}
-							},
-							{
-								 "software": { "id" :3 }
-							}
-							],
-*/
-console.log("ID maquina var global =" + idmaquina_global);    
-var jmaquina = { maquina : { id : idmaquina_global  }}
-    
-    console.log("objeto json maquina" + jmaquina);
-
-    msgSolicitacao.itensSolicitacao[0] = jmaquina;
-
-    console.log( "o que tem no json msg solicitação =  " +  msgSolicitacao.itensSolicitacao[0]);
-
-
-   // msgSolicitacao.itensSolicitacao[0] = { maquina : 3}
-
-    var listaSw = document.getElementsByName("softwares[]");
-    var cont=1;
-    for (i=0; i<listaSw.length; i++){
-        if (listaSw[i].checked){
-            var idSoftware = parseInt(listaSw[i].value);
-            var itemSoftware = { 
-               software : { id: idSoftware }
-            }
-            msgSolicitacao.itensSolicitacao[cont] = itemSoftware;
-            cont++;
-        }
-    }
-
-    var cabecalho = {
-        method : 'POST',
-        body : JSON.stringify(msgSolicitacao),
-        headers : {
-            'Content-Type': 'application/json'
-        }
-    }
-
-    fetch("http://localhost:8080/solicitacoes/nova",cabecalho)
-      .then(res => alert("foi!!!"))
-      .catch(err => alert("deu ruim"));
-
-    console.log(msgSolicitacao);
+    console.log (" 1 - chama cadastra maquina......");
+    cadastraMaquina(numProc, numMemo, numDisc, numBand, msgSolicitacao);
+       
 }
-
-
 
 function recuperaMaquina (res){
   //  console.log(" 6 - res recuperado = " + res.id);
     console.log(" 7 - res id maquina = " + JSON.stringify(res.id));
-
     idmaquina_global = res.id;
 }
-async function cadastraMaquina(processador, memoria, disco, banda){
+async function cadastraMaquina(processador, memoria, disco, banda, msgSolicitacao){
     
     var id = 0;
     var msgMaquina = {
@@ -211,21 +134,91 @@ async function cadastraMaquina(processador, memoria, disco, banda){
         }
     }
 
-    try{
-    const resp = await fetch("http://localhost:8080/maquina/nova",cabecalhoMaquina)
-    const data = await resp.json();
-    idmaquina_global = parseInt(data.id);
-    //return data.id;
+     try{
+            const res = await fetch('http://localhost:8080/maquina/nova',cabecalhoMaquina);
+            const json = await res.json();
 
-    } catch (err) {
-        alert ("deu ruim maquina ");
-    }
+            console.log(" 1.1 - estou no json async! .");
+            console.log(json.id);
+            console.log(" 1.2 - sai doo json async! ..");
+            idmaquina_global = parseInt(json.id);
+           
+            //return data.id;
+            console.log("3 - ID maquina var global =" + idmaquina_global);    
+            var jmaquina = { maquina : { id : idmaquina_global  }}
+            console.log(" 4 -objeto json maquina" + JSON.stringify(jmaquina));
+            msgSolicitacao.itensSolicitacao[0] = jmaquina;
+            console.log( " 5 - o que tem no json msg solicitação =  " + JSON.stringify(msgSolicitacao.itensSolicitacao[0]));
+
+            // msgSolicitacao.itensSolicitacao[0] = { maquina : 3}
+
+            var listaSw = document.getElementsByName("softwares[]");
+            var cont=1;
+            for (i=0; i<listaSw.length; i++){
+                if (listaSw[i].checked){
+                    var idSoftware = parseInt(listaSw[i].value);
+                    var itemSoftware = { 
+                                            software : { id: idSoftware }
+                                        }
+                    msgSolicitacao.itensSolicitacao[cont] = itemSoftware;
+                    cont++;
+                }
+            }
+
+            var cabecalho = {
+                method : 'POST',
+                body : JSON.stringify(msgSolicitacao),
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            }
+            // Tento criar uma nova solicitação
+            console.log(" 6 - tento criar uma solicitação");
+        if (idmaquina_global == 0)
+        {
+            console.log(" 6.1 -id maquina nova  = 0 sem criação de nova solicitação");
+        }else{
+            fetch("http://localhost:8080/solicitacoes/nova",cabecalho)
+            .then(res => alert("foi!!!"))
+            .catch(err => alert("deu ruim nova solicitacao"));
+            console.log("msgSolicitacao = "+ JSON.stringify(msgSolicitacao));
+        }
+
+
+        }
+         catch (err) {
+            alert ("deu ruim maquina " );
+        }
+
+
+
     //.then(res => alert("foi Maquina!!!"))
     //.then(res => res.json())
     //.then(res => recuperaMaquina(res))
     //.catch(err => alert("deu ruim Maquina"));
     
     //console.log(" 8 - resultado de  id depois  = " + id);
- 
+ }
+
+function cadastraSolicitacao(maq){
+    // monta json para criar a solicitação + tbl_itens com id maquina + id software + id solicitacao
+    
+    /* json ideal para criar uma solicitação completa.
+     	"itensSolicitacao" : [  {
+								"maquina" : {"id": 1}
+							    },
+								{
+								"software": { "id": 2}
+							    },
+							    {
+								 "software": { "id" :3 }
+							    }
+							],*/
+    
 
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+    console.log("200ms.....")
+ }
