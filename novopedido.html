@@ -5,41 +5,51 @@
         <link rel="stylesheet" href="novopedido.css">
         <script type="text/javascript" src="novopedido.js"> </script>
     </head>
+    <style>
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        div {
+          border-radius: 5px;
+          background-color: #f1be7b;
+          padding: 20px;
+        }
+        </style>
     <body onload="carregaitens();">
 
         <h3> Novo Pedido </h3>
         <hr/>
-        <div class="row">
-            <div class="col-4">
+        <div class="container">
                 <form id="formMaquina">
                     Quantidade de Processador   <input type="number" id="numProc" value="1"><br/>
                     Quantidade de Memória       <input type="number" id="numMemo" value="1"><br/>
                     Quantidade de Disco         <input type="number" id="numDisc" value="1"><br/>
                     Quantidade de Banda         <input type="number" id="numBand" value="1"><br/>
                 </form>
-                <button type="button" onclick="obterValor();"> Obter Valor </button>
-            </div>
-        </br>
-            <div class="col-4"> 
-                <h3>
-                    Custo hora R$
-                    <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
-                </h3>
-                
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <form id="formPedido">
-                        Data do Pedido (dd/mm/aaaa) <input type="text" id="txtData" value="27/05/2020"> <br/>
-                        Observacoes  <input type="text" id="txtObs" value="teste">
-                        <div id="listaSw">
+                <form id="formPedido">
+                    Data do Pedido <i>(dd/mm/aaaa)</i> <input type="text" id="txtData"> <br/>
+                    Observacoes                 <input type="text" id="txtObs"> <br/>        
+                    <b>Softwares Disponíveis: </b>
+                    <div id="listaSw">
 
-                        </div>
-                        <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
-                    </form>
-                </div>               
-            </div>
-        </div>  
+                    </div>
+                    
+                    <b>Custo hora R$</b>     <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
+                </form>
+                <button type="button" onclick="obterValor();"> Obter Valor </button>
+                <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
+                <div class="row" id="msg" style="visibility:hidden;" >
+                    <div class="col-12">
+                        <h3 class="text-center">Falta Informacao para enviar o pedido</h3>
+                    </div>  
+        </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>   

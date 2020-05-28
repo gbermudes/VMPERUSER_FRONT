@@ -19,17 +19,11 @@ function carregavalor(custohw){
     fetch("http://localhost:8080/softwares")
       .then(res => res.json())
       .then(res => obterValorSw(res,x))
+      .catch(err => trataErro(err))
 }
 
 function obterValorSw(res, x){
-    /*carregavalor();
-    var numProc = document.getElementById("numProc").value;
-    var numMemo = document.getElementById("numMemo").value;
-    var numDisc = document.getElementById("numDisc").value;
-    var numBand = document.getElementById("numBand").value;
-    var custo = 0;
-    custo = (numProc * 10) + (numMemo * 5) + numDisc + numBand ;
-    */
+
     valorSoftwares = 0;
     // X é o custo da maquina
     valorSoftwares = x;
@@ -68,14 +62,14 @@ function obterValor(){
 
 function preencheCheckbox(res){
 
-    var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}} {{VALOR}} <br/>';
+    var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}} <br/>';
 
     var txtSoftwares = "";
     for (i=0; i<res.length; i++){
 
         txtSoftwares = txtSoftwares + templateCh.replace("{{ID}}",res[i].id)
-                                                .replace("{{NOME}}", res[i].nome)
-                                                .replace("{{VALOR}}", res[i].valor);
+                                                .replace("{{NOME}}", res[i].nome);
+                                                //.replace("{{VALOR}}", res[i].valor);
     }
     document.getElementById("listaSw").innerHTML = txtSoftwares;
 }
@@ -180,7 +174,7 @@ async function cadastraMaquina(processador, memoria, disco, banda, msgSolicitaca
         }else{
             fetch("http://localhost:8080/solicitacoes/nova",cabecalho)
             .then(res => alert("foi!!!"))
-            .catch(err => alert("deu ruim nova solicitacao"));
+            .catch(err => trataErro(err))
             console.log("msgSolicitacao = "+ JSON.stringify(msgSolicitacao));
         }
 
@@ -189,15 +183,6 @@ async function cadastraMaquina(processador, memoria, disco, banda, msgSolicitaca
          catch (err) {
             alert ("deu ruim maquina " );
         }
-
-
-
-    //.then(res => alert("foi Maquina!!!"))
-    //.then(res => res.json())
-    //.then(res => recuperaMaquina(res))
-    //.catch(err => alert("deu ruim Maquina"));
-    
-    //console.log(" 8 - resultado de  id depois  = " + id);
  }
 
 function cadastraSolicitacao(maq){
@@ -222,3 +207,8 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
     console.log("200ms.....")
  }
+
+ function trataErro(err){
+    console.log(err);
+    document.getElementById("msg").style="visibility:visible";
+}
