@@ -12,12 +12,9 @@ function recuperaDetalhe(){
     var id = parametro.substr(4);
 
     console.log("Numero da solicitacao = "+id);
-    //fetch("http://localhost:8080/softwares")
     fetch("http://localhost:8080/solicitacao/"+id)
         .then(res => res.json())
         .then(res => preenche(res));
-        //.then(res => console.log(res))
-        //.catch(err => alert("pedido nao encontrado"));
         
 }
 /// vem de software . js
@@ -33,15 +30,7 @@ function preenche(res){
 
     texto = texto +  template.replace("{{NUMSOLICITACAO}}", res.numSolicitacao)
                         .replace("{{OBSERVACOES}}", res.observacoes)
-                        .replace("{{VALOR}}", "US$ "+ res.valor.toFixed(2));
+                        .replace("{{VALOR}}", "R$ "+ res.valor.toFixed(2));
 
-    /*for (i=0; i<=tamanhoRes; i++){
-            //console.log("log do for i =" + i);
-            console.log("log do for i = " + JSON.stringify(res[i]));
-
-        texto = texto +  template.replace("{{NUMSOLICITACAO}}", res[i].numSolicitacao);
-                        //.replace("{{NOME}}",res[i].observacoes)
-                        //.replace("{{VALOR}}", "US$ "+ res[i].valor.toFixed(2));
-    }*/
     document.getElementById("detalhes").innerHTML = texto;
 }

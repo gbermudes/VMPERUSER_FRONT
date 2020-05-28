@@ -1,0 +1,14 @@
+body{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 174, 0);
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: rgb(21, 74, 121);
+
+}
+
+.container {
+    width: 500px;
+    clear: both;
+    text-align: center;
+  }

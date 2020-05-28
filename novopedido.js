@@ -186,21 +186,6 @@ async function cadastraMaquina(processador, memoria, disco, banda, msgSolicitaca
  }
 
 function cadastraSolicitacao(maq){
-    // monta json para criar a solicitação + tbl_itens com id maquina + id software + id solicitacao
-    
-    /* json ideal para criar uma solicitação completa.
-     	"itensSolicitacao" : [  {
-								"maquina" : {"id": 1}
-							    },
-								{
-								"software": { "id": 2}
-							    },
-							    {
-								 "software": { "id" :3 }
-							    }
-							],*/
-    
-
 }
 
 function sleep(ms) {
