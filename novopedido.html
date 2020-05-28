@@ -5,50 +5,33 @@
         <link rel="stylesheet" href="novopedido.css">
         <script type="text/javascript" src="novopedido.js"> </script>
     </head>
-    <style>
-        input[type=text], select {
-          width: 100%;
-          padding: 12px 20px;
-          margin: 8px 0;
-          display: inline-block;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-        }
-        
-        div {
-          border-radius: 5px;
-          background-color: rgb(255, 174, 0);;
-          padding: 20px;
-        }
-        </style>
-    <body onload="carregaitens();">
 
-        <h3> <b>Novo Pedido</b> </h3>
-        <hr/>
+    <body onload="carregaitens();" id="itau">
+ 
         <div class="container">
+            <h3> <b>Novo Pedido</b> </h3>
+            <hr/>
                 <form id="formMaquina">
-                    Quantidade de Processador   <input type="number" id="numProc" value="1"><br/>
-                    Quantidade de Memória (GB)  <input type="number" id="numMemo" value="1"><br/>
-                    Quantidade de Disco   (GB)  <input type="number" id="numDisc" value="1"><br/>
-                    Quantidade de Banda   (GB)  <input type="number" id="numBand" value="1"><br/>
+                    <b>Quantidade de Processador</b>   <input type="number" id="numProc" value="1"><br/>
+                    <b>Quantidade de Memória (GB)</b>  <input type="number" id="numMemo" value="1"><br/>
+                    <b>Quantidade de Disco   (GB)</b>  <input type="number" id="numDisc" value="1"><br/>
+                    <b>Quantidade de Banda   (GB)</b>  <input type="number" id="numBand" value="1"><br/>
                 </form>
+                <hr/>
                 <form id="formPedido">
                     Data do Pedido <i>(dd/mm/aaaa)</i> <input type="text" id="txtData"> <br/>
                     Observacoes                 <input type="text" id="txtObs"> <br/>        
                     <b>Softwares Disponíveis: </b>
-                    <div id="listaSw">
-
-                    </div>
                     
+                    <div class="form-check form-check-inline" id="listaSw">
+
+                    </div><br>
                     <b>Custo hora R$</b>     <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
+                </hr>
                 </form>
-                <button type="button" onclick="obterValor();"> Obter Valor </button>
-                <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
-                <div class="row" id="msg" style="visibility:hidden;" >
-                    <div class="col-12">
-                        <h3 class="text-center">Falta Informacao para enviar o pedido</h3>
-                    </div>  
+                <button type="button" class="button button1" onclick="obterValor();"> Obter Valor </button>
+                <button type="button" class="button button1" onclick="enviarPedido();"> Enviar Pedido </button>
+                <br><br><br>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -7,6 +7,13 @@ body{
 
 }
 
+#itau{
+    width: 100%;
+    background-image: url('./imagens/itau.png');    
+    background-repeat: no-repeat;
+    background-position: bottom right;
+  }
+
 .container {
     width: 500px;
     clear: both;

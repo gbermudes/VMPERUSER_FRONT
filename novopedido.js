@@ -62,7 +62,8 @@ function obterValor(){
 
 function preencheCheckbox(res){
 
-    var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}} <br/>';
+    var templateCh = '<input class="form-check-input" type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}}';
+    // var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}} <br>';
 
     var txtSoftwares = "";
     for (i=0; i<res.length; i++){
@@ -173,7 +174,7 @@ async function cadastraMaquina(processador, memoria, disco, banda, msgSolicitaca
             console.log(" 6.1 -id maquina nova  = 0 sem criação de nova solicitação");
         }else{
             fetch("http://localhost:8080/solicitacoes/nova",cabecalho)
-            .then(res => alert("foi!!!"))
+            .then(res => alert("Pedido Registrado com sucesso."))
             .catch(err => trataErro(err))
             console.log("msgSolicitacao = "+ JSON.stringify(msgSolicitacao));
         }
@@ -196,4 +197,8 @@ function sleep(ms) {
  function trataErro(err){
     console.log(err);
     document.getElementById("msg").style="visibility:visible";
+}
+
+function perfil(){
+    window.location = "perfil.html";
 }
