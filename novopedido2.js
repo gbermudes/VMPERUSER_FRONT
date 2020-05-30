@@ -147,7 +147,7 @@ function cadastraMaquina(processador, memoria, disco, banda, user){
             observacoes : txtObs,
             valor : txtValor,
             solicitante: {
-                id: 1
+                id: user.id
             },
             itensSolicitacao:[]
         }

@@ -6,39 +6,65 @@
     </head>
     <body onload="carregaitens();">
 
+
+        <div class="container">
+        <hr/>    
         <h3> Novo Pedido </h3>
         <hr/>
         <div class="row">
-            <div class="col-4">
+            <h4>Hardware:</h4>
+            <hr/>
+            <div class="col-md-3 mb-3">
+                <br>
                 <form id="formMaquina">
-                    Quantidade de Processador   <input type="number" id="numProc" value="1"><br/>
-                    Quantidade de Memória       <input type="number" id="numMemo" value="1"><br/>
-                    Quantidade de Disco         <input type="number" id="numDisc" value="1"><br/>
-                    Quantidade de Banda         <input type="number" id="numBand" value="1"><br/>
+                    <abbr title="Quantidade de Processador" class="initialism">Processador:</abbr><br/>
+                    <input type="number" id="numProc" value="1"><br/>
+                    <abbr title="Quantidade de Memória" class="initialism">Memoria:</abbr><br/>
+                    <input type="number" id="numMemo" value="1"><br/>
+                    <abbr title="Quantidade de Disco" class="initialism">Disco:</abbr><br/>
+                    <input type="number" id="numDisc" value="1"><br/>
+                    <abbr title="Quantidade de Banda" class="initialism">Banda:</abbr><br/>
+                    <input type="number" id="numBand" value="1"><br/>
                 </form>
-                <button type="button" onclick="obterValor();"> Obter Valor </button>
             </div>
-        </br>
-            <div class="col-4"> 
-                <h3>
-                    Custo hora R$
-                    <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
-                </h3>
-                
+        <h4>Solicitacao:</h4>
+        <hr/>
+                <div class="col-md-3 mb-3">
+                    <br>
+                    <form id="formPedido">
+                        <abbr title="Data do Pedido (dd/mm/aaaa)" class="initialism">Data:</abbr><br>
+                        <input type="text" id="txtData"> <br/>
+                        <abbr title="Observacoes" class="initialism">Observacoes:</abbr><br>
+                        <input type="text" id="txtObs"> <br/>
+                    </form>
+                </div>
+                <h4>Software:</h4>
+                <hr/>
+                <div class="col-md-2 mb-2">
+                    <form id="formPedido">
+                    <div  id="listaSw">
+                    </div>
+                   </form>
+                </div>
+               
             </div>
             <div class="row">
-                <div class="col-8">
-                    <form id="formPedido">
-                        Data do Pedido (dd/mm/aaaa) <input type="text" id="txtData"> <br/>
-                        Observacoes  <input type="text" id="txtObs">
-                        <div id="listaSw">
-
-                        </div>
-                        <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
-                    </form>
-                </div>               
+                <h4>Resumo:</h4>
+            <div class="col-md-3 mb-3"> 
+                    <abbr title="Custo Hora R$" class="initialism">Custo:</abbr><br/>
+                    <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
             </div>
-        </div>  
+            <div class="col-md-2 mb-2">
+                <abbr title="Custo Hora R$" class="initialism"></abbr><br>
+
+                <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
+            </div>
+            <div class="col-md-2 mb-2">
+                <abbr title="Custo Hora R$" class="initialism"></abbr><br>
+                <button type="button" onclick="obterValor();"> Obter Valor </button>
+            </div>
+        </div>
+        </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>   
