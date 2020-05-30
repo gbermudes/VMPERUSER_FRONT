@@ -19,17 +19,11 @@ function carregavalor(custohw){
     fetch("http://localhost:8080/softwares")
       .then(res => res.json())
       .then(res => obterValorSw(res,x))
+      .catch(err => trataErro(err))
 }
 
 function obterValorSw(res, x){
-    /*carregavalor();
-    var numProc = document.getElementById("numProc").value;
-    var numMemo = document.getElementById("numMemo").value;
-    var numDisc = document.getElementById("numDisc").value;
-    var numBand = document.getElementById("numBand").value;
-    var custo = 0;
-    custo = (numProc * 10) + (numMemo * 5) + numDisc + numBand ;
-    */
+
     valorSoftwares = 0;
     // X é o custo da maquina
     valorSoftwares = x;
@@ -39,18 +33,13 @@ function obterValorSw(res, x){
         if(listaSw[i].checked){
             //valorSoftwares = valorSoftwares + templateCh.replace("{{VALOR}}",res[i].valor);
             valorSoftwares = valorSoftwares + res[i].valor;
-            console.log (" 1.1 - valor i + software" + i + " - " +valorSoftwares);
+            
         }
         
     }
-    //document.getElementById("listaSw").innerHTML = valorSoftwares;
-    console.log(" 1 - valor Softwares depois do for = " + valorSoftwares);
+        
     document.getElementById("txtCustoHora").value = valorSoftwares;
-    //return valorSoftwares;
-    /*custo = Number.parseFloat(custo);
-    custo = (custo + valorSoftwares).toFixed(2);
-    console.log(custo);
-    */
+    
 }
 
 function obterValor(){
@@ -61,46 +50,34 @@ function obterValor(){
     var numBand = parseInt(document.getElementById("numBand").value);
     //var valorSoftwares = document.getElementById(valorSoftwares);
     var custo = 0;
-    
-    //var valorSoftwares = carregavalor(valorSoftwares);
-    custo = numProc * 10;
-    console.log(" 3.1 - valor Custo = " + custo);
-    custo = custo + numMemo * 5;
-    console.log(" 3.2 - valor Custo = " + custo);
-    custo = custo + numDisc;
-    console.log(" 3.3 - valor Custo = " + custo);
-    custo = custo + numBand; 
-    console.log(" 3.4 - valor Custo = " + custo);
-    custo = parseInt(custo); // da 1511 se tudo 1 cpu 1 mem 1 disco.. 
-    console.log(" 3 - valor Custo = " + custo);
-    carregavalor(custo);
-    valorSoftwares = parseInt(valorSoftwares);
-
-    //var valorSoftwares = valorSoftwares;
-    console.log(" 2 - valorSoftwares = "+ valorSoftwares);
-    
-    //custo = (custo + valorSoftwares);
-    console.log(" 4 -valor custo + valor software = " + custo);
    
+    //var valorSoftwares = carregavalor(valorSoftwares);
+    custo = (numProc * 10) + (numMemo * 5) + numDisc + numBand;
+    custo = parseInt(custo); // da 17 se tudo 1 cpu 1 mem 1 disco.. 
+    carregavalor(custo); // pega valor de maquima e soma software..
+   
+    valorSoftwares = parseInt(valorSoftwares);
     
 }
 
 function preencheCheckbox(res){
 
-    var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}} {{VALOR}} <br/>';
+    var templateCh = '<input class="form-check-input" type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}}';
+    // var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}} <br>';
 
     var txtSoftwares = "";
     for (i=0; i<res.length; i++){
 
         txtSoftwares = txtSoftwares + templateCh.replace("{{ID}}",res[i].id)
-                                                .replace("{{NOME}}", res[i].nome)
-                                                .replace("{{VALOR}}", res[i].valor);
+                                                .replace("{{NOME}}", res[i].nome);
+                                                //.replace("{{VALOR}}", res[i].valor);
     }
     document.getElementById("listaSw").innerHTML = txtSoftwares;
 }
 
 
 function enviarPedido(){
+<<<<<<< HEAD
 /*id	int	NO	PRI		auto_increment
 qntd_banda	int	YES			
 qntd_cpu	int	YES			
@@ -126,6 +103,45 @@ function xhr_setup (xhr, route) {
 }
 function cadastraMaquina(processador, memoria, disco, banda, user){
 
+=======
+    var numProc = document.getElementById("numProc").value; //1
+    var numMemo = document.getElementById("numMemo").value; //1
+    var numDisc = document.getElementById("numDisc").value; //1 
+    var numBand = document.getElementById("numBand").value;
+    var txtData = document.getElementById("txtData").value;
+    var txtObs  = document.getElementById("txtObs").value;
+    var txtValor = document.getElementById("txtCustoHora").value;
+    txtValor = parseFloat(txtValor);
+    
+  
+
+    var userStr = localStorage.getItem("VMuser");
+    var user = JSON.parse(userStr);
+    var msgSolicitacao = {
+        //id  : null,
+        data : txtData,
+        observacoes : txtObs,
+        valor : txtValor,
+        solicitante: {
+            id: user.id
+        },
+        itensSolicitacao:[]
+    }
+
+    console.log (" 1 - chama cadastra maquina......");
+    cadastraMaquina(numProc, numMemo, numDisc, numBand, msgSolicitacao);
+       
+}
+
+function recuperaMaquina (res){
+  //  console.log(" 6 - res recuperado = " + res.id);
+    console.log(" 7 - res id maquina = " + JSON.stringify(res.id));
+    idmaquina_global = res.id;
+}
+async function cadastraMaquina(processador, memoria, disco, banda, msgSolicitacao){
+    
+    var id = 0;
+>>>>>>> a1c62de222dd1e5602fb5083ffb053d3239036f0
     var msgMaquina = {
         qntd_cpu : processador,
         qntd_memoria : memoria,
@@ -173,6 +189,7 @@ function cadastraMaquina(processador, memoria, disco, banda, user){
                 'Content-Type': 'application/json'
             }
         }
+<<<<<<< HEAD
 
         fetch("http://localhost:8080/solicitacoes/nova",cabecalho)
           .then(res => alert("foi!!!"))
@@ -200,4 +217,80 @@ function cadastraMaquina(processador, memoria, disco, banda, user){
     //.catch(err => alert("deu ruim Maquina"));
     
     //console.log(" 8 - resultado de  id depois  = " + id);     
+=======
+    }
+
+     try{
+            const res = await fetch('http://localhost:8080/maquina/nova',cabecalhoMaquina);
+            const json = await res.json();
+
+            console.log(" 1.1 - estou no json async! .");
+            console.log(json.id);
+            console.log(" 1.2 - sai doo json async! ..");
+            idmaquina_global = parseInt(json.id);
+           
+            //return data.id;
+            console.log("3 - ID maquina var global =" + idmaquina_global);    
+            var jmaquina = { maquina : { id : idmaquina_global  }}
+            console.log(" 4 -objeto json maquina" + JSON.stringify(jmaquina));
+            msgSolicitacao.itensSolicitacao[0] = jmaquina;
+            console.log( " 5 - o que tem no json msg solicitação =  " + JSON.stringify(msgSolicitacao.itensSolicitacao[0]));
+
+            // msgSolicitacao.itensSolicitacao[0] = { maquina : 3}
+
+            var listaSw = document.getElementsByName("softwares[]");
+            var cont=1;
+            for (i=0; i<listaSw.length; i++){
+                if (listaSw[i].checked){
+                    var idSoftware = parseInt(listaSw[i].value);
+                    var itemSoftware = { 
+                                            software : { id: idSoftware }
+                                        }
+                    msgSolicitacao.itensSolicitacao[cont] = itemSoftware;
+                    cont++;
+                }
+            }
+
+            var cabecalho = {
+                method : 'POST',
+                body : JSON.stringify(msgSolicitacao),
+                headers : {
+                    'Content-Type': 'application/json'
+                }
+            }
+            // Tento criar uma nova solicitação
+            console.log(" 6 - tento criar uma solicitação");
+        if (idmaquina_global == 0)
+        {
+            console.log(" 6.1 -id maquina nova  = 0 sem criação de nova solicitação");
+        }else{
+            fetch("http://localhost:8080/solicitacoes/nova",cabecalho)
+            .then(res => alert("Pedido Registrado com sucesso."))
+            .catch(err => trataErro(err))
+            console.log("msgSolicitacao = "+ JSON.stringify(msgSolicitacao));
+        }
+
+
+        }
+         catch (err) {
+            alert ("deu ruim maquina " );
+        }
+ }
+
+function cadastraSolicitacao(maq){
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+    console.log("200ms.....")
+ }
+
+ function trataErro(err){
+    console.log(err);
+    document.getElementById("msg").style="visibility:visible";
+}
+
+function perfil(){
+    window.location = "perfil.html";
+>>>>>>> a1c62de222dd1e5602fb5083ffb053d3239036f0
 }
