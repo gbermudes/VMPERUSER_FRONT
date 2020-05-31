@@ -7,18 +7,26 @@ input[type=text], select {
   border-radius: 4px;
   box-sizing: border-box;
 }
+body{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: rgb(21, 74, 121);
 
+}
 div {
   border-radius: 5px;
-  background-color: rgb(255, 174, 0);;
   padding: 20px;
 }
-
 #itau{
   width: 100%;
   background-image: url('./imagens/itau.png');    
   background-repeat: no-repeat;
   background-position: bottom right;
+}
+#listaSw{
+  font-size: 25px;
 }
 .container {
     width: 500px;
@@ -42,7 +50,11 @@ div {
     transition-duration: 0.4s;
     cursor: pointer;
   }
-
+    a {
+      color: white;
+      text-decoration: none;
+      background-color: transparent;
+    }
   .button1 {
     background-color: white; 
     color: black; 
@@ -53,3 +65,7 @@ div {
     background-color: rgb(22, 99, 214);
     color: white;
   }
+  #fundo{
+    background-image: url('./imagens/itau.jpg');    
+    background-repeat: no-repeat;
+}

@@ -87,7 +87,7 @@ function obterValor(){
 
 function preencheCheckbox(res){
 
-    var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}"> {{NOME}} {{VALOR}} <br/>';
+    var templateCh = '<input type="checkbox" name="softwares[]" value="{{ID}}" > {{NOME}} - R$ {{VALOR}} <br>';
 
     var txtSoftwares = "";
     for (i=0; i<res.length; i++){

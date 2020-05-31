@@ -3,97 +3,46 @@
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="novopedido.css">
-        <script type="text/javascript" src="novopedido.js"> </script>
+        <script type="text/javascript" src="novopedido2.js"> </script>
     </head>
-
-<<<<<<< HEAD
-
-        <div class="container">
-        <hr/>    
-        <h3> Novo Pedido </h3>
-        <hr/>
-        <div class="row">
-            <h4>Hardware:</h4>
-            <hr/>
-            <div class="col-md-3 mb-3">
-                <br>
-                <form id="formMaquina">
-                    <abbr title="Quantidade de Processador" class="initialism">Processador:</abbr><br/>
-                    <input type="number" id="numProc" value="1"><br/>
-                    <abbr title="Quantidade de Memória" class="initialism">Memoria:</abbr><br/>
-                    <input type="number" id="numMemo" value="1"><br/>
-                    <abbr title="Quantidade de Disco" class="initialism">Disco:</abbr><br/>
-                    <input type="number" id="numDisc" value="1"><br/>
-                    <abbr title="Quantidade de Banda" class="initialism">Banda:</abbr><br/>
-                    <input type="number" id="numBand" value="1"><br/>
-                </form>
-            </div>
-        <h4>Solicitacao:</h4>
-        <hr/>
-                <div class="col-md-3 mb-3">
-                    <br>
-                    <form id="formPedido">
-                        <abbr title="Data do Pedido (dd/mm/aaaa)" class="initialism">Data:</abbr><br>
-                        <input type="text" id="txtData"> <br/>
-                        <abbr title="Observacoes" class="initialism">Observacoes:</abbr><br>
-                        <input type="text" id="txtObs"> <br/>
-                    </form>
+        <body onload="carregaitens();" id="itau">
+        <div class="container-fluid" width="100%">
+            <div class="row">
+                <div class="col-12" style="text-align: center;" >
+                    <h1 style="text-align: center;"> <b>Novo Pedido</b> </h1>
+                    <hr/>
                 </div>
-                <h4>Software:</h4>
-                <hr/>
-                <div class="col-md-2 mb-2">
-                    <form id="formPedido">
-                    <div  id="listaSw">
-                    </div>
-                   </form>
-                </div>
-               
             </div>
             <div class="row">
-                <h4>Resumo:</h4>
-            <div class="col-md-3 mb-3"> 
-                    <abbr title="Custo Hora R$" class="initialism">Custo:</abbr><br/>
-                    <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
-            </div>
-            <div class="col-md-2 mb-2">
-                <abbr title="Custo Hora R$" class="initialism"></abbr><br>
-
-                <button type="button" onclick="enviarPedido();"> Enviar Pedido </button>
-            </div>
-            <div class="col-md-2 mb-2">
-                <abbr title="Custo Hora R$" class="initialism"></abbr><br>
-                <button type="button" onclick="obterValor();"> Obter Valor </button>
-            </div>
-        </div>
-=======
-    <body onload="carregaitens();" id="itau">
- 
-        <div class="container">
-            <h3> <b>Novo Pedido</b> </h3>
-            <hr/>
-                <form id="formMaquina">
-                    <b>Quantidade de Processador</b>   <input type="number" id="numProc" value="1"><br/>
-                    <b>Quantidade de Memória (GB)</b>  <input type="number" id="numMemo" value="1"><br/>
-                    <b>Quantidade de Disco   (GB)</b>  <input type="number" id="numDisc" value="1"><br/>
-                    <b>Quantidade de Banda   (GB)</b>  <input type="number" id="numBand" value="1"><br/>
-                </form>
-                <hr/>
-                <form id="formPedido">
-                    Data do Pedido <i>(dd/mm/aaaa)</i> <input type="text" id="txtData"> <br/>
-                    Observacoes                 <input type="text" id="txtObs"> <br/>        
+                 <form id="margin" class="col-4"></form>
+                 <form id="formPedido" class="col-4" style="text-align: left;">
+                    <abbr title="Data do Pedido (dd/mm/aaaa)" class="initialism"><b>Data do Pedido<i>(dd/mm/aaaa)</i></b></abbr><br>
+                    <input type="text" id="txtData"> <br/>
+                    <abbr title="Observacoes" class="initialism"><b>Observacoes:</b></abbr><br>
+                    <input type="text" id="txtObs"> <br/>        
+                    <abbr title="Quantidade de Processador" class="initialism"><b>Processador:</b></abbr><br/>
+                    <input type="number" id="numProc" value="1"><br/>
+                    <abbr title="Quantidade de Memória" class="initialism"><b>Memoria:</b></abbr><br/>
+                    <input type="number" id="numMemo" value="1"><br/>
+                      <abbr title="Quantidade de Disco" class="initialism"><b>Disco:</b></abbr><br/>
+                    <input type="number" id="numDisc" value="1"><br/>
+                    <abbr title="Quantidade de Banda" class="initialism"><b>Banda:</b></abbr><br/>
+                    <input type="number" id="numBand" value="1"><br/>
                     <b>Softwares Disponíveis: </b>
-                    
-                    <div class="form-check form-check-inline" id="listaSw">
+                        <div class="form-check" id="listaSw">
+                        </div>
+                    <br>
+                    <b>Custo hora R$</b><input type="text" id="txtCustoHora" value="0" disabled=true><br/>
+                    <button type="button" class="btn btn-primary" onclick="obterValor();"> Obter Valor </button>
+                    <button type="button" class="btn btn-primary" onclick="enviarPedido();"> Enviar Pedido </button>
+    
+            </form>
 
-                    </div><br>
-                    <b>Custo hora R$</b>     <input type="text" id="txtCustoHora" value="0" disabled=true><br/>
-                </hr>
-                </form>
-                <button type="button" class="button button1" onclick="obterValor();"> Obter Valor </button>
-                <button type="button" class="button button1" onclick="enviarPedido();"> Enviar Pedido </button>
-                <br><br><br>
->>>>>>> a1c62de222dd1e5602fb5083ffb053d3239036f0
-        </div>
+            </div>
+            <div class="row">
+            </div>
+
+</div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>   

@@ -25,7 +25,7 @@ function autenticar(){
     fetch("http://localhost:8080/login",cabecalho)
         .then(res => res.json())
         .then(res => logar(res))
-        .catch(err => trataErro(err))
+        .catch(err => trataErro(err));
 }
 
 function logar(res){

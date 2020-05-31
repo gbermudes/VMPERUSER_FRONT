@@ -8,11 +8,69 @@
     </head>
     <body onload="recuperaDetalhe();" id="itau">
     <br><br>
-    <div class="container">
-            <h2> Detalhes da Solicitação </h2>
-        <div id="detalhes">
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12" style="text-align: center;" >
+                <h1 style="text-align: center;"> <b>Detalhes da Solicitação </b> </h1>
+                <hr/>
+            </div>
         </div>
+<h2>Solicitacao</h2>
+        <table border="false" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Num Solicitacao</th>
+                <th>Descrição</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr id="detalhes">
+                </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        <hr/>
+        <h2>Software</h2>
+
+            <table id="thsoftware" border="false" class="table table-bordered " >
+                <thead>
+                  <tr>
+                    <th>Num Solicitacao</th>
+                    <th>Tipo</th>
+                    <th>Nome</th>
+                    <th>Fornecedor</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                        <tr id="detalhesSW">   
+                        </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <hr/>
+            <h2>Hardware</h2>
+                <table  border="false" class="table table-bordered" >
+                    <thead>
+                      <tr>
+                        <th>Num Solicitacao</th>
+                        <th>Tipo</th>
+                        <th>ID</th>
+                        <th>Detalhes</th>
+                        <th>ValorTotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="detalhesHW">
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
