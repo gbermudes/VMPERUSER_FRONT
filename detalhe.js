@@ -2,7 +2,6 @@
 var template='<th> {{NUMSOLICITACAO}} </th>'+
              '<th> {{OBSERVACOES}} </th>'+
              '<th> {{VALOR}} </th>' ;
-
 var templateItemSW='<th> {{NUMITEM}} </th>'+
              '<th> {{TIPO}} </th>'+
              '<th> {{SOFTWARENAME}} </th>' +

@@ -6,7 +6,6 @@ var templateMaquina = '<p> CPU: {{CPU}}</p> '+
                       '<p> DISCO: {{DISCO}}</p>' +
                       '<p> BANDA DE REDE: {{BANDA}}</p>';
 
-
 function carregaitens(){
   
     fetch("http://localhost:8080/softwares")
