@@ -12,7 +12,13 @@ $(document).ready(function(){
    result.src="novopedido.html";
   });
 });
+$(document).ready(function () {
 
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+
+});
 function logout(){
     localStorage.removeItem("VMuser");
     window.location = "index.html";

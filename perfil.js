@@ -5,6 +5,7 @@ var templateBio     = '<h3> {{NOME}} </h3> <hr> <p> RACKF: {{RACF}}</p> '+
 var templatePedidos = '<div class="row">'+ 
                           '<div class="col-12"> <a href="detalhe.html?id={{NUM}}">{{DATA}} - {{OBSERVACOES}} </a></div>'+
                       '</div>';
+                      
 function carregaperfil(){
     // qual a lógica disso?
     // primeiro: se o usuário tá logado, as infos dele estão no LocalStorage, certo?
